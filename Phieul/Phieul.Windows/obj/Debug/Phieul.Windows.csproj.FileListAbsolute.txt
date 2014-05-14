@@ -1,0 +1,10 @@
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\App.g.i.cs
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\App.g.cs
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\MainPage.g.i.cs
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\MainPage.g.cs
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\XamlTypeInfo.g.cs
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\App.xaml
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\MainPage.xaml
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\App.xbf
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\MainPage.xbf
+C:\Dev\Phieul\Phieul\Phieul.Windows\obj\Debug\XamlSaveStateFile.xml
