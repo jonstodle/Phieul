@@ -32,7 +32,7 @@ namespace Phieul{
         public Filling.ConsumptionUnits ConsumptionUnit {
             get {
                 if(rs.Values.ContainsKey("ConsumptionUnit")) {
-                    rs.Values["ConsumptionUnit"] = Filling.ConsumptionUnits.LitresPerTenKilometer;
+                    rs.Values["ConsumptionUnit"] = Filling.ConsumptionUnits.LitresPerMetricMile;
                 }
                 return (Filling.ConsumptionUnits)rs.Values["ConsumptionUnit"];
             }
@@ -43,7 +43,7 @@ namespace Phieul{
         public Filling.PriceUnits PriceUnit {
             get {
                 if(rs.Values.ContainsKey("PriceUnit")) {
-                    rs.Values["PriceUnit"] = Filling.PriceUnits.PerTenKilometer;
+                    rs.Values["PriceUnit"] = Filling.PriceUnits.PerMetricMile;
                 }
                 return (Filling.PriceUnits)rs.Values["PriceUnit"];
             }

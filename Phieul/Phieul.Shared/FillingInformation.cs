@@ -13,7 +13,7 @@ namespace Phieul{
         public DateTime Date { get { return Origin.Date; } }
         public double Price { get { return Origin.Price; } }
         public double Odometer { get { return Origin.Odometer; } }
-        public double Volume { get { return Origin.Volume; } }
+        public double Volume { get { return Origin.FilledVolume; } }
         public double Distance { get; set; }
         public double AverageConsumption {
             get {

@@ -32,9 +32,9 @@ namespace Phieul {
 
         void CalculateDistances() {
             if(Count > 0) {
-                this[0].Distance = 0;
+                this[0].TraveledDistance = 0;
                 for(int i = 1; i < Count; i++) {
-                    this[i].Distance = this[i].Odometer - this[i - 1].Odometer;
+                    this[i].TraveledDistance = this[i].Odometer - this[i - 1].Odometer;
                 }
             }
         }
@@ -48,8 +48,8 @@ namespace Phieul {
                     var currentItem = this[i];
                     if(currentItem.FullTank) {
                         if(partials.Count > 0) {
-                            var tv = partials.Sum(n => n.Volume) + currentItem.Volume;
-                            var td = partials.Sum(n=> n.Distance) + currentItem.Distance;
+                            var tv = partials.Sum(n => n.FilledVolume) + currentItem.FilledVolume;
+                            var td = partials.Sum(n=> n.TraveledDistance) + currentItem.TraveledDistance;
                             currentItem.CalculatingVolume = tv;
                             currentItem.CalculatingDistance = td;
                             foreach(Filling f in partials) {
@@ -58,16 +58,16 @@ namespace Phieul {
                             }
                             partials.Clear();
                         } else {
-                            currentItem.CalculatingVolume = currentItem.Volume;
-                            currentItem.CalculatingDistance = currentItem.Distance;
+                            currentItem.CalculatingVolume = currentItem.FilledVolume;
+                            currentItem.CalculatingDistance = currentItem.TraveledDistance;
                         }
                     } else {
                         partials.Add(currentItem);
                     }
                 }
                 if(partials.Count > 0) {
-                    double tv = partials.Sum(n=>n.Volume);
-                    double td = partials.Sum(n=>n.Distance);
+                    double tv = partials.Sum(n=>n.FilledVolume);
+                    double td = partials.Sum(n=>n.TraveledDistance);
                     foreach(Filling f in partials) {
                         f.CalculatingVolume = tv;
                         f.CalculatingDistance = td;

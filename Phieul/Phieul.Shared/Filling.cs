@@ -7,30 +7,31 @@ using System.Text;
 namespace Phieul {
     public class Filling : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
-        public enum ConsumptionUnits { LitresPerTenKilometer, MilesPerGallon }
-        public enum PriceUnits { PerKilometer, PerMile, PerTenKilometer }
+        public enum ConsumptionUnits { LitresPerMetricMile, MilesPerGallon }
+        public enum PriceUnits { PerKilometer, PerMile, PerMetricMile }
 
         #region Unit Settings
-        private Units.DistanceUnits _distanceUnit;
-        public Units.DistanceUnits DistanceUnit {
-            get { return _distanceUnit; }
+        public Distance.Units DistanceUnit {
+            get {
+                return Odometer.Unit;
+            }
 
             set {
-                if(value != _distanceUnit) {
-                    _distanceUnit = value;
+                if(value != Odometer.Unit) {
+                    Odometer = new Distance(Odometer.Value, value);
                     OnPropertyChanged("DistanceUnit");
                     OnPropertyChanged("Odometer");
                 }
             }
         }
 
-        private Units.VolumeUnits _volumeUnit;
-        public Units.VolumeUnits VolumeUnit {
-            get { return _volumeUnit; }
+        private Volume.Units _volumeUnit;
+        public Volume.Units VolumeUnit {
+            get { return FilledVolume.Unit; }
 
             set {
-                if(value != _volumeUnit) {
-                    _volumeUnit = value;
+                if(value != FilledVolume.Unit) {
+                    FilledVolume = new Volume(FilledVolume.Value, value);
                     OnPropertyChanged("VolumeUnit");
                     OnPropertyChanged("Volume");
                 }
@@ -99,27 +100,25 @@ namespace Phieul {
             }
         }
 
-        private double _odometer;
-        public double Odometer {
-            get { return Units.DistanceCalculation(_odometer, DistanceUnit); }
+        private Distance _odometer;
+        public Distance Odometer {
+            get { return _odometer; }
 
             set {
-                var val = Units.DistanceCalculation(value, DistanceUnit, true);
-                if(val != _odometer) {
-                    _odometer = val;
+                if(value != _odometer) {
+                    _odometer = new Distance(value, DistanceUnit);
                     OnPropertyChanged("Odometer");
                 }
             }
         }
 
-        private double _volume;
-        public double Volume {
-            get { return Units.VolumeCalculation(_volume, VolumeUnit); }
+        private Volume _filledVolume;
+        public Volume FilledVolume {
+            get { return _filledVolume; }
 
             set {
-                var val = Units.VolumeCalculation(value, VolumeUnit, true);
-                if(val != _volume) {
-                    _volume = val;
+                if(value != _filledVolume) {
+                    _filledVolume = new Volume(value, VolumeUnit);
                     OnPropertyChanged("Volume");
                 }
             }
@@ -139,43 +138,40 @@ namespace Phieul {
             }
         }
 
-        private double _distance;
-        public double Distance {
+        private Distance _traveledDistance;
+        public Distance TraveledDistance {
             get {
                 if(IsFirstFilling) return 0;
-                return Units.DistanceCalculation(_distance, DistanceUnit);
+                return _traveledDistance;
             }
 
             set {
-                var val = Units.DistanceCalculation(value, DistanceUnit, true);
-                if(val != _distance) {
-                    _distance = val;
+                if(value != _traveledDistance) {
+                    _traveledDistance = new Distance(value, DistanceUnit); ;
                     OnPropertyChanged("Distance");
                 }
             }
         }
 
-        private double _calculatingVolume;
-        public double CalculatingVolume {
+        private Volume _calculatingVolume;
+        public Volume CalculatingVolume {
             private get { return _calculatingVolume; }
 
             set {
-                var val = Units.VolumeCalculation(value, VolumeUnit, true);
-                if(val != _calculatingVolume) {
-                    _calculatingVolume = val;
+                if(value != _calculatingVolume) {
+                    _calculatingVolume = new Volume(value, VolumeUnit);
                     OnPropertyChanged("CalculatingVolume");
                 }
             }
         }
 
-        private double _calculatingDistance;
-        public double CalculatingDistance {
+        private Distance _calculatingDistance;
+        public Distance CalculatingDistance {
             private get { return _calculatingDistance; }
 
             set {
-                var val = Units.DistanceCalculation(value, DistanceUnit, true);
-                if(val != _calculatingDistance) {
-                    _calculatingDistance = val;
+                if(value != _calculatingDistance) {
+                    _calculatingDistance = new Distance(value, DistanceUnit); ;
                     OnPropertyChanged("CalculatingDistance");
                 }
             }
@@ -185,8 +181,8 @@ namespace Phieul {
             get {
                 if(IsFirstFilling) return 0;
                 double ac = 0;
-                if(ConsumptionUnit == ConsumptionUnits.LitresPerTenKilometer) ac = Units.VolumeCalculation(CalculatingVolume, Units.VolumeUnits.Litres) / Units.DistanceCalculation(CalculatingDistance, Units.DistanceUnits.TenKilometers);
-                else if(ConsumptionUnit == ConsumptionUnits.MilesPerGallon) ac = Units.DistanceCalculation(CalculatingDistance, Units.DistanceUnits.Miles) / Units.VolumeCalculation(CalculatingVolume, Units.VolumeUnits.Gallons);
+                if(ConsumptionUnit == ConsumptionUnits.LitresPerMetricMile) ac = new Volume(CalculatingVolume.Value, Volume.Units.Litres) / new Distance(CalculatingDistance.Value, Distance.Units.MetricMiles);
+                else if(ConsumptionUnit == ConsumptionUnits.MilesPerGallon) ac = new Distance(CalculatingDistance.Value, Distance.Units.Miles) / new Volume(CalculatingVolume.Value, Volume.Units.Gallons);
                 return ac;
             }
         }
@@ -195,16 +191,18 @@ namespace Phieul {
             get {
                 if(IsFirstFilling) return 0;
                 double dp = 0;
-                if(PriceUnit == PriceUnits.PerKilometer) dp = (Price * Units.VolumeCalculation(CalculatingVolume, VolumeUnit)) / Units.DistanceCalculation(CalculatingDistance, Units.DistanceUnits.Kilometers);
-                else if(PriceUnit == PriceUnits.PerMile) dp = (Price * Units.VolumeCalculation(CalculatingVolume, VolumeUnit)) / Units.DistanceCalculation(CalculatingDistance, Units.DistanceUnits.Miles);
-                else if(PriceUnit == PriceUnits.PerTenKilometer) dp = (Price * Units.VolumeCalculation(CalculatingVolume, VolumeUnit)) / Units.DistanceCalculation(CalculatingDistance, Units.DistanceUnits.TenKilometers);
+                if(PriceUnit == PriceUnits.PerKilometer) dp = (Price * CalculatingVolume) / new Distance(CalculatingDistance.Value, Distance.Units.Kilometers);
+                else if(PriceUnit == PriceUnits.PerMile) dp = (Price * CalculatingVolume) / new Distance(CalculatingDistance.Value, Distance.Units.Miles);
+                else if(PriceUnit == PriceUnits.PerMetricMile) dp = (Price * CalculatingVolume) / new Distance(CalculatingDistance.Value, Distance.Units.MetricMiles);
                 return dp;
             }
         }
         #endregion Calculated properties
 
         private void OnPropertyChanged(string changedProperty) {
-            PropertyChanged(this, new PropertyChangedEventArgs(changedProperty));
+            if(PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(changedProperty)); 
+            }
         }
     }
 }
