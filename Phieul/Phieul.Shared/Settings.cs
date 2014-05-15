@@ -2,53 +2,41 @@
 using System.Collections.Generic;
 using System.Text;
 using Windows.Storage;
+using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace Phieul{
-    public class Settings{
-        ApplicationDataContainer rs = ApplicationData.Current.RoamingSettings;
+    public sealed class Settings : INotifyPropertyChanged {
+        public event PropertyChangedEventHandler PropertyChanged;
+        static readonly Settings instance = new Settings();
+        static ApplicationDataContainer settings = ApplicationData.Current.RoamingSettings;
+        static FillingCollection data;
 
-        public Units.DistanceUnits DistanceUnit {
-            get {
-                if(rs.Values.ContainsKey("DistanceUnit")) {
-                    rs.Values["DistanceUnit"] = Units.DistanceUnits.Kilometers;
-                }
-                return (Units.DistanceUnits)rs.Values["DistanceUnit"];
-            }
-
-            set { rs.Values["DistanceUnit"] = value; }
+        static Settings() {
+            Instance.LoadData();
         }
 
-        public Units.VolumeUnits VolumeUnit {
-            get {
-                if(rs.Values.ContainsKey("VolumeUnit")) {
-                    rs.Values["VolumeUnit"] = Units.VolumeUnits.Litres;
-                }
-                return (Units.VolumeUnits)rs.Values["VolumeUnit"];
-            }
-
-            set { rs.Values["VolumeUnit"] = value; }
+        public static Settings Instance {
+            get { return instance; }
         }
 
-        public Filling.ConsumptionUnits ConsumptionUnit {
-            get {
-                if(rs.Values.ContainsKey("ConsumptionUnit")) {
-                    rs.Values["ConsumptionUnit"] = Filling.ConsumptionUnits.LitresPerMetricMile;
-                }
-                return (Filling.ConsumptionUnits)rs.Values["ConsumptionUnit"];
-            }
-
-            set { rs.Values["ConsumptionUnit"] = value; }
+        async void LoadData() {
+            var rf = ApplicationData.Current.RoamingFolder;
+            var file = await rf.CreateFileAsync("data.json", CreationCollisionOption.OpenIfExists);
+            data = JsonConvert.DeserializeObject<FillingCollection>(await FileIO.ReadTextAsync(file));
         }
 
-        public Filling.PriceUnits PriceUnit {
-            get {
-                if(rs.Values.ContainsKey("PriceUnit")) {
-                    rs.Values["PriceUnit"] = Filling.PriceUnits.PerMetricMile;
-                }
-                return (Filling.PriceUnits)rs.Values["PriceUnit"];
-            }
+        public async void SaveData() {
+            var json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            var rf = ApplicationData.Current.RoamingFolder;
+            var file = await rf.CreateFileAsync("data.json", CreationCollisionOption.OpenIfExists);
+            await FileIO.WriteTextAsync(file, json);
+        }
 
-            set { rs.Values["PriceUnit"] = value; }
+        void OnPropertyChanged(string propertyName) {
+            if(PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

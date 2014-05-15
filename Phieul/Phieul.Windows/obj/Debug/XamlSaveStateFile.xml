@@ -1,4 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
+    <LocalAssembly PathName="c:\dev\phieul\phieul\phieul.windows\obj\debug\intermediatexaml\phieul.windows.exe" HashGuid="7fc44462-5267-2bd0-5218-0c395151e30f" />
+    <ReferenceAssembly PathName="c:\dev\phieul\packages\newtonsoft.json.6.0.3\lib\netcore45\newtonsoft.json.dll" HashGuid="7727b668-bdac-5612-b497-e55cbaabf5af" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

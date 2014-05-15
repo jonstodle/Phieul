@@ -8,7 +8,7 @@ using System.Linq;
 namespace Phieul {
     public class FillingCollection : ObservableCollection<Filling> {
         protected override void OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
-            //base.OnCollectionChanged(e);
+            base.OnCollectionChanged(e);
             if(e.Action == NotifyCollectionChangedAction.Add) {
                 foreach(Filling item in e.NewItems)item.PropertyChanged += ItemPropertyChanged;
             } else if(e.Action == NotifyCollectionChangedAction.Remove) {

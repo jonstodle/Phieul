@@ -20,7 +20,6 @@ namespace Phieul {
                 if(value != Odometer.Unit) {
                     Odometer = new Distance(Odometer.Value, value);
                     OnPropertyChanged("DistanceUnit");
-                    OnPropertyChanged("Odometer");
                 }
             }
         }
@@ -33,7 +32,6 @@ namespace Phieul {
                 if(value != FilledVolume.Unit) {
                     FilledVolume = new Volume(FilledVolume.Value, value);
                     OnPropertyChanged("VolumeUnit");
-                    OnPropertyChanged("Volume");
                 }
             }
         }

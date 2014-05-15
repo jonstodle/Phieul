@@ -30,3 +30,7 @@ C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\qualifiers.txt
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\qualifiers.txt.intermediate
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\ProjectArchitectures.txt
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Phieul.WindowsPhone.csprojResolveAssemblyReference.cache
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Phieul.WindowsPhone.csproj.GenerateResource.Cache
