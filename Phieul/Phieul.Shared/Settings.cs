@@ -5,7 +5,7 @@ using Windows.Storage;
 using Newtonsoft.Json;
 using System.ComponentModel;
 
-namespace Phieul{
+namespace Phieul {
     public sealed class Settings : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
         static readonly Settings instance = new Settings();
@@ -18,6 +18,62 @@ namespace Phieul{
 
         public static Settings Instance {
             get { return instance; }
+        }
+
+        public Distance.Units DefaultDistanceUnit {
+            get {
+                if(settings.Values.ContainsKey("DefaultDistanceUnit")) {
+                    settings.Values["DefaultDistanceUnit"] = Distance.Units.Kilometers;
+                }
+                return (Distance.Units)settings.Values["DefaultDistanceUnit"];
+            }
+
+            set {
+                settings.Values["DefaultDistanceUnit"] = value;
+                OnPropertyChanged("DefaultDistanceUnit");
+            }
+        }
+
+        public Volume.Units DefaultVolumeUnit {
+            get {
+                if(settings.Values.ContainsKey("DefaultVolumeUnit")) {
+                    settings.Values["DefaultVolumeUnit"] = Volume.Units.Litres;
+                }
+                return (Volume.Units)settings.Values["DefaultVolumeUnit"];
+            }
+
+            set {
+                settings.Values["DefaultVolumeUnit"] = value;
+                OnPropertyChanged("DefaultVolumeUnit");
+            }
+        }
+
+        public Filling.ConsumptionUnits DefaultConsumptionUnit {
+            get {
+                if(settings.Values.ContainsKey("DefaultConsumptionUnit")) {
+                    settings.Values["DefaultConsumptionUnit"] = Filling.ConsumptionUnits.LitresPerMetricMile;
+                }
+                return (Filling.ConsumptionUnits)settings.Values["DefaultConsumptionUnit"];
+            }
+
+            set {
+                settings.Values["DefaultConsumptionUnit"] = value;
+                OnPropertyChanged("DefaultConsumptionUnit");
+            }
+        }
+
+        public Filling.PriceUnits DefaultPriceUnit {
+            get {
+                if(settings.Values.ContainsKey("DefaultPriceUnit")) {
+                    settings.Values["DefaultPriceUnit"] = Filling.PriceUnits.PerMetricMile;
+                }
+                return (Filling.PriceUnits)settings.Values["DefaultPriceUnit"];
+            }
+
+            set {
+                settings.Values["DefaultPriceUnit"] = value;
+                OnPropertyChanged("DefaultPriceUnit");
+            }
         }
 
         async void LoadData() {
@@ -37,6 +93,11 @@ namespace Phieul{
             if(PropertyChanged != null) {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        ~Settings() {
+            System.Diagnostics.Debug.WriteLine("Finalized");
+            SaveData();
         }
     }
 }

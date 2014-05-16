@@ -1,4 +1,5 @@
 ﻿using Phieul.Common;
+using Phieul.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,5 +99,12 @@ namespace Phieul {
         }
 
         #endregion
+
+        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e) {
+            var tag = (string)((AppBarButton)sender).Tag;
+            if(tag == "AddFilling") {
+                Frame.Navigate(typeof(AddFillingPage));
+            }
+        }
     }
 }

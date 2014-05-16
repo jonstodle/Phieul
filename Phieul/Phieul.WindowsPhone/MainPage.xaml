@@ -32,4 +32,12 @@
 
         </Grid>
     </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="add filling" Icon="Add" Tag="AddFilling" Tapped="AppBarButton_Tapped"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

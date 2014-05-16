@@ -1,9 +1,11 @@
-Assets\Logo.scale-240.png
-Assets\SmallLogo.scale-240.png
-Assets\SplashScreen.scale-240.png
-Assets\Square71x71Logo.scale-240.png
-Assets\StoreLogo.scale-240.png
-Assets\WideLogo.scale-240.png
+Assets\asphalt.jpg
+Assets\Tiles\Logo.scale-240.png
+Assets\Tiles\SmallLogo.scale-240.png
+Assets\Tiles\SplashScreen.scale-240.png
+Assets\Tiles\Square71x71Logo.scale-240.png
+Assets\Tiles\StoreLogo.scale-240.png
+Assets\Tiles\WideLogo.scale-240.png
 App.xbf
 MainPage.xbf
+Pages\AddFillingPage.xbf
 Phieul.WindowsPhone.xr.xml

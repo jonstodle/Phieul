@@ -24,7 +24,6 @@ namespace Phieul {
             }
         }
 
-        private Volume.Units _volumeUnit;
         public Volume.Units VolumeUnit {
             get { return FilledVolume.Unit; }
 

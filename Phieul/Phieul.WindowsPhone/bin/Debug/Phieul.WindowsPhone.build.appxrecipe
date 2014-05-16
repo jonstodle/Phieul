@@ -22,35 +22,35 @@
     <AppxPackagedFile Include="C:\Dev\Phieul\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Logo.scale-240.png">
-      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\Logo.scale-240.png">
+      <PackagePath>Assets\Tiles\Logo.scale-240.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\SmallLogo.scale-240.png">
-      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\SmallLogo.scale-240.png">
+      <PackagePath>Assets\Tiles\SmallLogo.scale-240.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\SplashScreen.scale-240.png">
-      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\SplashScreen.scale-240.png">
+      <PackagePath>Assets\Tiles\SplashScreen.scale-240.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Square71x71Logo.scale-240.png">
-      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Tiles\Square71x71Logo.scale-240.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\StoreLogo.scale-240.png">
-      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\StoreLogo.scale-240.png">
+      <PackagePath>Assets\Tiles\StoreLogo.scale-240.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\WideLogo.scale-240.png">
-      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Assets\Tiles\WideLogo.scale-240.png">
+      <PackagePath>Assets\Tiles\WideLogo.scale-240.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.Shared\Assets\asphalt.jpg">
+      <PackagePath>Assets\asphalt.jpg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Pages\AddFillingPage.xbf">
+      <PackagePath>Pages\AddFillingPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Phieul.WindowsPhone.xr.xml">
       <PackagePath>Phieul.WindowsPhone.xr.xml</PackagePath>

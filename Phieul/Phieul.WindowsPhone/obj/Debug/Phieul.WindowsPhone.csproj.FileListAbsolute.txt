@@ -34,3 +34,8 @@ C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Newtonsoft.Json.dll
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Newtonsoft.Json.xml
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Phieul.WindowsPhone.csprojResolveAssemblyReference.cache
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Phieul.WindowsPhone.csproj.GenerateResource.Cache
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Pages\AddFillingPage.xbf
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\AddFillingPage.g.i.cs
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\AddFillingPage.g.cs
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\AddFillingPage.xaml
+C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\AddFillingPage.xbf
