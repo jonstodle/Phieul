@@ -36,7 +36,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="add filling" Icon="Add" Tag="AddFilling" Tapped="AppBarButton_Tapped"/>
+                <AppBarButton Label="add filling" Icon="Add" Tag="AddFilling" Click="AppBarButton_Click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

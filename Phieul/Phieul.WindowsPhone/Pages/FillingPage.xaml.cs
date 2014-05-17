@@ -22,11 +22,11 @@ namespace Phieul.Pages {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddFillingPage : Page {
+    public sealed partial class FillingPage : Page {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public AddFillingPage() {
+        public FillingPage() {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);

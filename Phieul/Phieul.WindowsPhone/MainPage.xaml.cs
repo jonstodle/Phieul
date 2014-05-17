@@ -100,10 +100,10 @@ namespace Phieul {
 
         #endregion
 
-        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e) {
+        private void AppBarButton_Click(object sender, RoutedEventArgs e) {
             var tag = (string)((AppBarButton)sender).Tag;
             if(tag == "AddFilling") {
-                Frame.Navigate(typeof(AddFillingPage));
+                Frame.Navigate(typeof(FillingPage)); 
             }
         }
     }

@@ -36,7 +36,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:ConnectionId='1' Label="add filling" Icon="Add" Tag="AddFilling"                             />
+                <AppBarButton x:ConnectionId='1' Label="add filling" Icon="Add" Tag="AddFilling"                           />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
