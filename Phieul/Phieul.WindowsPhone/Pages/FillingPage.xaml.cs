@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -121,28 +123,49 @@ namespace Phieul.Pages {
         }
 
         private void SetActiveField(InputFields toField) {
-            DateBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            var accentColor = (Color)App.Current.Resources.ThemeDictionaries["SystemColorControlAccentColor"];
+            var upscaled = 1.5d;
+            var regular = 1d;
+
             PriceBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
             VolumeBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
             OdometerBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            ScaleAnimate(regular, PriceScaleTransform);
+            ScaleAnimate(regular, VolumeScaleTransform);
+            ScaleAnimate(regular, OdometerScaleTransform);
 
-            var accentColor = (Color)App.Current.Resources.ThemeDictionaries["SystemColorControlAccentColor"];
 
             switch(toField) {
                 case InputFields.Price:
                     PriceBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    ScaleAnimate(upscaled, PriceScaleTransform);
                     break;
                 case InputFields.Volume:
                     VolumeBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    ScaleAnimate(upscaled, VolumeScaleTransform);
                     break;
                 case InputFields.Odometer:
                     OdometerBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    ScaleAnimate(upscaled, OdometerScaleTransform);
                     break;
                 default:
                     break;
             }
 
             ActiveField = toField;
+        }
+
+        private void ScaleAnimate(double to, DependencyObject obj) {
+            var xAnimation = new DoubleAnimation() { To = to };
+            var yAnimation = new DoubleAnimation() { To = to };
+            Storyboard.SetTarget(xAnimation, obj);
+            Storyboard.SetTargetProperty(xAnimation, "ScaleX");
+            Storyboard.SetTarget(yAnimation, obj);
+            Storyboard.SetTargetProperty(yAnimation, "ScaleY");
+            var sb = new Storyboard() { Duration = TimeSpan.FromMilliseconds(200) };
+            sb.Children.Add(xAnimation);
+            sb.Children.Add(yAnimation);
+            sb.Begin();
         }
 
         private void AddCharacter(string character) {

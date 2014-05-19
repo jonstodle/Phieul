@@ -61,6 +61,9 @@
             <StackPanel Name="InputPanel">
                 <Border Name="DateBorder" Padding="19,0">
                     <Grid Name="DateGrid">
+                        <Grid.RenderTransform>
+                            <ScaleTransform x:Name="DateScaleTransform"/>
+                        </Grid.RenderTransform>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="4*"/>
@@ -126,6 +129,9 @@
                 </Border>
                 <Border x:ConnectionId='16' Name="PriceBorder"                       >
                     <Grid Name="PriceGrid">
+                        <Grid.RenderTransform>
+                            <ScaleTransform CenterY=".5" x:Name="PriceScaleTransform"/>
+                        </Grid.RenderTransform>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="4*"/>
@@ -136,6 +142,9 @@
                 </Border>
                 <Border x:ConnectionId='17' Name="VolumeBorder"                       >
                     <Grid Name="VolumeGrid">
+                        <Grid.RenderTransform>
+                            <ScaleTransform CenterY=".5" x:Name="VolumeScaleTransform"/>
+                        </Grid.RenderTransform>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="4*"/>
@@ -146,6 +155,9 @@
                 </Border>
                 <Border x:ConnectionId='18' Name="OdometerBorder"                       >
                     <Grid Name="OdometerGrid">
+                        <Grid.RenderTransform>
+                            <ScaleTransform CenterY=".5" x:Name="OdometerScaleTransform"/>
+                        </Grid.RenderTransform>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="4*"/>
@@ -164,7 +176,7 @@
                 <Grid.Resources>
                     <conv:CheckedToTankConverter xmlns:conv="using:Phieul.Converters" x:Key="CTT"/>
                 </Grid.Resources>
-                <ToggleButton Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource CTT}}" BorderThickness="0" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <ToggleButton Name="FullTankToggle" Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource CTT}}" BorderThickness="0" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Grid Background="Transparent">
@@ -257,7 +269,7 @@
                         </ControlTemplate>
                     </ToggleButton.Template>
                 </ToggleButton>
-                <Button Content="OPTIONS" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0">
+                <Button Name="OptionsButton" Content="OPTIONS" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="Grid" Background="Transparent">
