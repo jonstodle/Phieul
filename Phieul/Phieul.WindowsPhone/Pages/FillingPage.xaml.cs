@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,6 +26,8 @@ namespace Phieul.Pages {
     public sealed partial class FillingPage : Page {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private enum InputFields { Price, Volume, Odometer }
+        private InputFields ActiveField;
 
         public FillingPage() {
             this.InitializeComponent();
@@ -32,6 +35,8 @@ namespace Phieul.Pages {
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            SetActiveField(InputFields.Price);
         }
 
         /// <summary>
@@ -98,5 +103,124 @@ namespace Phieul.Pages {
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            var tag = (string)((Button)sender).Tag;
+            var content = (string)((Button)sender).Content;
+            if(tag == "Character") {
+                AddCharacter(content);
+            } else if(tag == "Delete") {
+                RemoveCharacter();
+            } else if(tag == "Up") {
+                MoveUp();
+            } else if(tag == "Down") {
+                MoveDown();
+            } else if(tag == "Save") {
+                //TODO: Implement save logic
+            }
+        }
+
+        private void SetActiveField(InputFields toField) {
+            DateBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            PriceBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            VolumeBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            OdometerBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+            var accentColor = (Color)App.Current.Resources.ThemeDictionaries["SystemColorControlAccentColor"];
+
+            switch(toField) {
+                case InputFields.Price:
+                    PriceBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    break;
+                case InputFields.Volume:
+                    VolumeBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    break;
+                case InputFields.Odometer:
+                    OdometerBorder.BorderBrush = new SolidColorBrush(accentColor);
+                    break;
+                default:
+                    break;
+            }
+
+            ActiveField = toField;
+        }
+
+        private void AddCharacter(string character) {
+            TextBlock tb = null;
+            switch(ActiveField) {
+                case InputFields.Price:
+                    tb = PriceInput;
+                    break;
+                case InputFields.Volume:
+                    tb = VolumeInput;
+                    break;
+                case InputFields.Odometer:
+                    tb = OdometerInput;
+                    break;
+                default:
+                    break;
+            }
+            if(character == "." && tb.Text.Contains(character)) return;
+            tb.Text += character;
+        }
+
+        private void RemoveCharacter() {
+            TextBlock tb = null;
+            switch(ActiveField) {
+                case InputFields.Price:
+                    tb = PriceInput;
+                    break;
+                case InputFields.Volume:
+                    tb = VolumeInput;
+                    break;
+                case InputFields.Odometer:
+                    tb = OdometerInput;
+                    break;
+                default:
+                    break;
+            }
+            if(tb.Text == string.Empty) return;
+            tb.Text = tb.Text.Remove(tb.Text.Count() - 1);
+        }
+
+        private void MoveUp() {
+            switch(ActiveField) {
+                case InputFields.Price:
+                    break;
+                case InputFields.Volume:
+                    SetActiveField(InputFields.Price);
+                    break;
+                case InputFields.Odometer:
+                    SetActiveField(InputFields.Volume);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void MoveDown() {
+            switch(ActiveField) {
+                case InputFields.Price:
+                    SetActiveField(InputFields.Volume);
+                    break;
+                case InputFields.Volume:
+                    SetActiveField(InputFields.Odometer);
+                    break;
+                case InputFields.Odometer:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Border_Tapped(object sender, TappedRoutedEventArgs e) {
+            if(sender == PriceBorder) {
+                SetActiveField(InputFields.Price);
+            } else if(sender == VolumeBorder) {
+                SetActiveField(InputFields.Volume);
+            } else if(sender == OdometerBorder) {
+                SetActiveField(InputFields.Odometer);
+            }
+        }
     }
 }
