@@ -124,29 +124,29 @@ namespace Phieul.Pages {
 
         private void SetActiveField(InputFields toField) {
             var accentColor = (Color)App.Current.Resources.ThemeDictionaries["SystemColorControlAccentColor"];
-            var upscaled = 1.5d;
+            var upscaled = 1.1d;
             var regular = 1d;
 
             PriceBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
             VolumeBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
             OdometerBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            ScaleAnimate(regular, PriceScaleTransform);
-            ScaleAnimate(regular, VolumeScaleTransform);
-            ScaleAnimate(regular, OdometerScaleTransform);
+            ScaleAnimate(PriceGrid, regular);
+            ScaleAnimate(VolumeGrid, regular);
+            ScaleAnimate(OdometerGrid, regular);
 
 
             switch(toField) {
                 case InputFields.Price:
                     PriceBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(upscaled, PriceScaleTransform);
+                    ScaleAnimate(PriceGrid, upscaled);
                     break;
                 case InputFields.Volume:
                     VolumeBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(upscaled, VolumeScaleTransform);
+                    ScaleAnimate(VolumeGrid, upscaled);
                     break;
                 case InputFields.Odometer:
                     OdometerBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(upscaled, OdometerScaleTransform);
+                    ScaleAnimate(OdometerGrid, upscaled);
                     break;
                 default:
                     break;
@@ -155,17 +155,8 @@ namespace Phieul.Pages {
             ActiveField = toField;
         }
 
-        private void ScaleAnimate(double to, DependencyObject obj) {
-            var xAnimation = new DoubleAnimation() { To = to };
-            var yAnimation = new DoubleAnimation() { To = to };
-            Storyboard.SetTarget(xAnimation, obj);
-            Storyboard.SetTargetProperty(xAnimation, "ScaleX");
-            Storyboard.SetTarget(yAnimation, obj);
-            Storyboard.SetTargetProperty(yAnimation, "ScaleY");
-            var sb = new Storyboard() { Duration = TimeSpan.FromMilliseconds(200) };
-            sb.Children.Add(xAnimation);
-            sb.Children.Add(yAnimation);
-            sb.Begin();
+        private void ScaleAnimate(UIElement obj, double to) {
+            obj.ScaleTransform(to, 0);
         }
 
         private void AddCharacter(string character) {

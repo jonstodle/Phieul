@@ -124,7 +124,7 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[10];
+            _typeNameTable = new string[11];
             _typeNameTable[0] = "Phieul.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -133,10 +133,11 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
             _typeNameTable[5] = "Phieul.Common.ObservableDictionary";
             _typeNameTable[6] = "Object";
             _typeNameTable[7] = "String";
-            _typeNameTable[8] = "Phieul.Converters.CheckedToTankConverter";
-            _typeNameTable[9] = "Phieul.Pages.FillingPage";
+            _typeNameTable[8] = "Phieul.Converters.FullToReducedHeightConverter";
+            _typeNameTable[9] = "Phieul.Converters.CheckedToTankConverter";
+            _typeNameTable[10] = "Phieul.Pages.FillingPage";
 
-            _typeTable = new global::System.Type[10];
+            _typeTable = new global::System.Type[11];
             _typeTable[0] = typeof(global::Phieul.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -145,8 +146,9 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
             _typeTable[5] = typeof(global::Phieul.Common.ObservableDictionary);
             _typeTable[6] = typeof(global::System.Object);
             _typeTable[7] = typeof(global::System.String);
-            _typeTable[8] = typeof(global::Phieul.Converters.CheckedToTankConverter);
-            _typeTable[9] = typeof(global::Phieul.Pages.FillingPage);
+            _typeTable[8] = typeof(global::Phieul.Converters.FullToReducedHeightConverter);
+            _typeTable[9] = typeof(global::Phieul.Converters.CheckedToTankConverter);
+            _typeTable[10] = typeof(global::Phieul.Pages.FillingPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -183,8 +185,9 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
 
         private object Activate_0_MainPage() { return new global::Phieul.MainPage(); }
         private object Activate_5_ObservableDictionary() { return new global::Phieul.Common.ObservableDictionary(); }
-        private object Activate_8_CheckedToTankConverter() { return new global::Phieul.Converters.CheckedToTankConverter(); }
-        private object Activate_9_FillingPage() { return new global::Phieul.Pages.FillingPage(); }
+        private object Activate_8_FullToReducedHeightConverter() { return new global::Phieul.Converters.FullToReducedHeightConverter(); }
+        private object Activate_9_CheckedToTankConverter() { return new global::Phieul.Converters.CheckedToTankConverter(); }
+        private object Activate_10_FillingPage() { return new global::Phieul.Pages.FillingPage(); }
         private void MapAdd_5_ObservableDictionary(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
@@ -247,16 +250,23 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
                 xamlType = new global::Phieul.Phieul_WindowsPhone_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 8:   //  Phieul.Converters.CheckedToTankConverter
+            case 8:   //  Phieul.Converters.FullToReducedHeightConverter
                 userType = new global::Phieul.Phieul_WindowsPhone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.Activator = Activate_8_CheckedToTankConverter;
+                userType.Activator = Activate_8_FullToReducedHeightConverter;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 9:   //  Phieul.Pages.FillingPage
+            case 9:   //  Phieul.Converters.CheckedToTankConverter
+                userType = new global::Phieul.Phieul_WindowsPhone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_9_CheckedToTankConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 10:   //  Phieul.Pages.FillingPage
                 userType = new global::Phieul.Phieul_WindowsPhone_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_9_FillingPage;
+                userType.Activator = Activate_10_FillingPage;
                 userType.AddMemberName("NavigationHelper");
                 userType.AddMemberName("DefaultViewModel");
                 userType.SetIsLocalType();
@@ -644,5 +654,6 @@ namespace Phieul.Phieul_WindowsPhone_XamlTypeInfo
         }
     }
 }
+
 
 

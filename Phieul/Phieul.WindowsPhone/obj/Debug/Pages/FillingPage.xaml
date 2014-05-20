@@ -3,15 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Phieul.Pages"
+    xmlns:conv="using:Phieul.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0"/>
-        </Style>
         <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
@@ -29,7 +27,7 @@
         <Style TargetType="Border">
             <Setter Property="BorderThickness" Value="0,2.5"/>
             <Setter Property="Padding" Value="19,10"/>
-            <Setter Property="Margin" Value="-19,-1.25"/>
+            <Setter Property="Margin" Value="0,-1.25"/>
         </Style>
     </Page.Resources>
 
@@ -46,20 +44,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <!--<TextBlock Text="page title" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>-->
-        </StackPanel>
+        <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="19,12,0,0"/>
 
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,0,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Name="InputPanel">
-                <Border Name="DateBorder" Padding="19,0">
+                <Border Name="DateBorder">
                     <Grid Name="DateGrid">
                         <Grid.RenderTransform>
                             <ScaleTransform x:Name="DateScaleTransform"/>
@@ -99,22 +93,10 @@
                                                                 <VisualState x:Name="Normal"/>
                                                                 <VisualState x:Name="PointerOver"/>
                                                                 <VisualState x:Name="Pressed"/>
-                                                                <VisualState x:Name="Disabled">
-                                                                    <Storyboard>
-                                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
-                                                                        </ObjectAnimationUsingKeyFrames>
-                                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
-                                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
-                                                                        </ObjectAnimationUsingKeyFrames>
-                                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
-                                                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
-                                                                        </ObjectAnimationUsingKeyFrames>
-                                                                    </Storyboard>
-                                                                </VisualState>
+                                                                <VisualState x:Name="Disabled"/>
                                                             </VisualStateGroup>
                                                         </VisualStateManager.VisualStateGroups>
-                                                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0,10">
+                                                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                                                             <ContentPresenter x:Name="ContentPresenter" FontWeight="Normal" FontSize="{ThemeResource TextStyleLargeFontSize}" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                                         </Border>
                                                     </Grid>
@@ -166,7 +148,6 @@
                         <TextBlock Name="OdometerInput" Text="162596" Grid.Column="1"/>
                     </Grid>
                 </Border>
-                
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -174,9 +155,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
-                    <conv:CheckedToTankConverter xmlns:conv="using:Phieul.Converters" x:Key="CTT"/>
+                    <conv:CheckedToTankConverter x:Key="CTT"/>
                 </Grid.Resources>
-                <ToggleButton Name="FullTankToggle" Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource CTT}}" BorderThickness="0" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                <ToggleButton Name="FullTankToggle" Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource CTT}}" BorderThickness="0" IsChecked="True" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Grid Background="Transparent">
@@ -269,7 +250,7 @@
                         </ControlTemplate>
                     </ToggleButton.Template>
                 </ToggleButton>
-                <Button Name="OptionsButton" Content="OPTIONS" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" BorderThickness="0">
+                <Button Name="OptionsButton" Content="OPTIONS" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" BorderThickness="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="Grid" Background="Transparent">
@@ -322,7 +303,10 @@
                     </Button.Template>
                 </Button>
             </Grid>
-            <Grid Name="ButtonGrid" Grid.Row="2" VerticalAlignment="Bottom" Margin="-19,0">
+            <Grid Name="ButtonGrid" Grid.Row="2" VerticalAlignment="Bottom">
+                <Grid.Resources>
+                    <conv:FullToReducedHeightConverter x:Name="FTR"/>
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -349,10 +333,10 @@
 
                 <Button x:ConnectionId='11' Content="." Tag="Character" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="2"                     />
 
-                <Button x:ConnectionId='12' Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay}"                     />
-                <Button x:ConnectionId='13' Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Up" Style="{StaticResource SquareButton}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay}"                     />
-                <Button x:ConnectionId='14' Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Down" Style="{StaticResource SquareButton}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay}"                     />
-                <Button x:ConnectionId='15' Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay}"                     />
+                <Button x:ConnectionId='12' Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}"                     />
+                <Button x:ConnectionId='13' Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Up" Style="{StaticResource SquareButton}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}"                     />
+                <Button x:ConnectionId='14' Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Down" Style="{StaticResource SquareButton}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}"                     />
+                <Button x:ConnectionId='15' Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}"                     />
             </Grid>
         </Grid>
     </Grid>
