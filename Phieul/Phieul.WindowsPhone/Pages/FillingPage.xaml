@@ -32,6 +32,10 @@
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/asphalt.jpg" Opacity=".2"/>
+        </Grid.Background>
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>
@@ -48,262 +52,85 @@
 
         <Grid Grid.Row="1" x:Name="ContentRoot">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Name="InputPanel">
-                <Border Name="DateBorder">
-                    <Grid Name="DateGrid">
-                        <Grid.RenderTransform>
-                            <ScaleTransform x:Name="DateScaleTransform"/>
-                        </Grid.RenderTransform>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="DATE"/>
-                        <DatePicker Name="DateInput" Grid.Column="1">
-                            <DatePicker.Template>
-                                <ControlTemplate>
-                                    <StackPanel x:Name="LayoutRoot">
-                                        <Button x:Name="FlyoutButton" BorderThickness="0" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsEnabled="{TemplateBinding IsEnabled}" Padding="0" MinHeight="0">
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Grid x:Name="Grid" Background="Transparent">
-                                                        <VisualStateManager.VisualStateGroups>
-                                                            <VisualStateGroup x:Name="CommonStates">
-                                                                <VisualStateGroup.Transitions>
-                                                                    <VisualTransition From="Pressed" To="PointerOver">
-                                                                        <Storyboard>
-                                                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                                        </Storyboard>
-                                                                    </VisualTransition>
-                                                                    <VisualTransition From="PointerOver" To="Normal">
-                                                                        <Storyboard>
-                                                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                                        </Storyboard>
-                                                                    </VisualTransition>
-                                                                    <VisualTransition From="Pressed" To="Normal">
-                                                                        <Storyboard>
-                                                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                                        </Storyboard>
-                                                                    </VisualTransition>
-                                                                </VisualStateGroup.Transitions>
-                                                                <VisualState x:Name="Normal"/>
-                                                                <VisualState x:Name="PointerOver"/>
-                                                                <VisualState x:Name="Pressed"/>
-                                                                <VisualState x:Name="Disabled"/>
-                                                            </VisualStateGroup>
-                                                        </VisualStateManager.VisualStateGroups>
-                                                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                                                            <ContentPresenter x:Name="ContentPresenter" FontWeight="Normal" FontSize="{ThemeResource TextStyleLargeFontSize}" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
-                                    </StackPanel>
+            
+            <Grid Name="InputGrid" Margin="0,6">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="Background" Value="{ThemeResource PhoneRadioCheckBoxBrush}"/>
+                        <Setter Property="BorderBrush" Value="{ThemeResource PhoneRadioCheckBoxBorderBrush}"/>
+                        <Setter Property="FontSize" Value="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                        <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="{ThemeResource CheckBoxAndRadioButtonTextPaddingThickness}"/>
+                        <Setter Property="MinWidth" Value="{ThemeResource CheckBoxAndRadioButtonMinWidthSize}"/>
+                        <Setter Property="GroupName" Value="InputRadios"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="RadioButton">
+                                    <Grid Background="Transparent">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="MouseOver"/>
+                                                <VisualState x:Name="PointerOver"/>
+                                                <VisualState x:Name="Pressed"/>
+                                                <VisualState x:Name="Disabled"/>
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="CheckStates">
+                                                <VisualState x:Name="Checked">
+                                                    <Storyboard Duration="0:0:0.2">
+                                                        
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Unchecked"/>
+                                                <VisualState x:Name="Indeterminate"/>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Border Name="Border" BorderThickness="1" BorderBrush="{ThemeResource SystemColorControlAccentBrush}">
+                                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Border>
+                                    </Grid>
                                 </ControlTemplate>
-                            </DatePicker.Template>
-                        </DatePicker>
-                    </Grid>
-                </Border>
-                <Border Name="PriceBorder" Tapped="Border_Tapped">
-                    <Grid Name="PriceGrid">
-                        <Grid.RenderTransform>
-                            <ScaleTransform CenterY=".5" x:Name="PriceScaleTransform"/>
-                        </Grid.RenderTransform>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="PRICE"/>
-                        <TextBlock Name="PriceInput" Text="12.65" Grid.Column="1"/>
-                    </Grid>
-                </Border>
-                <Border Name="VolumeBorder" Tapped="Border_Tapped">
-                    <Grid Name="VolumeGrid">
-                        <Grid.RenderTransform>
-                            <ScaleTransform CenterY=".5" x:Name="VolumeScaleTransform"/>
-                        </Grid.RenderTransform>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="FUEL"/>
-                        <TextBlock Name="VolumeInput" Text="54" Grid.Column="1"/>
-                    </Grid>
-                </Border>
-                <Border Name="OdometerBorder" Tapped="Border_Tapped">
-                    <Grid Name="OdometerGrid">
-                        <Grid.RenderTransform>
-                            <ScaleTransform CenterY=".5" x:Name="OdometerScaleTransform"/>
-                        </Grid.RenderTransform>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="4*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="ODOMETER"/>
-                        <TextBlock Name="OdometerInput" Text="162596" Grid.Column="1"/>
-                    </Grid>
-                </Border>
-            </StackPanel>
-            <Grid Grid.Row="1">
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.Resources>
-                    <conv:CheckedToTankConverter x:Key="CTT"/>
-                </Grid.Resources>
-                <ToggleButton Name="FullTankToggle" Content="{Binding IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource CTT}}" BorderThickness="0" IsChecked="True" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-                    <ToggleButton.Template>
-                        <ControlTemplate TargetType="ToggleButton">
-                            <Grid Background="Transparent">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal"/>
-                                        <VisualState x:Name="PointerOver"/>
-                                        <VisualState x:Name="Pressed"/>
-                                        <VisualState x:Name="Disabled">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="Checked">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="EnabledContent">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneButtonBasePressedForegroundBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneDisabledBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneDisabledBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DisabledContent">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneBackgroundBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="CheckedPointerOver">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="EnabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneAccentBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="EnabledContent">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneButtonBasePressedForegroundBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneDisabledBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneDisabledBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DisabledContent">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneBackgroundBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="CheckedPressed"/>
-                                        <VisualState x:Name="CheckedDisabled">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="EnabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneAccentBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="EnabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0.4"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="EnabledContent">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PhoneButtonBasePressedForegroundBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="Indeterminate"/>
-                                        <VisualState x:Name="IndeterminatePointerOver"/>
-                                        <VisualState x:Name="IndeterminatePressed"/>
-                                        <VisualState x:Name="IndeterminateDisabled">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledBackground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                <Border x:Name="EnabledBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
-                                    <ContentPresenter x:Name="EnabledContent" FontWeight="Normal" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <Border x:Name="DisabledBackground" BorderBrush="{ThemeResource ButtonDisabledBorderThemeBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" IsHitTestVisible="False" Margin="{ThemeResource PhoneTouchTargetOverhang}" Visibility="Collapsed">
-                                    <ContentPresenter x:Name="DisabledContent" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{ThemeResource ButtonDisabledForegroundThemeBrush}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </ToggleButton.Template>
-                </ToggleButton>
-                <Button Name="OptionsButton" Content="OPTIONS" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" BorderThickness="0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Grid x:Name="Grid" Background="Transparent">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualStateGroup.Transitions>
-                                            <VisualTransition From="Pressed" To="PointerOver">
-                                                <Storyboard>
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                </Storyboard>
-                                            </VisualTransition>
-                                            <VisualTransition From="PointerOver" To="Normal">
-                                                <Storyboard>
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                </Storyboard>
-                                            </VisualTransition>
-                                            <VisualTransition From="Pressed" To="Normal">
-                                                <Storyboard>
-                                                    <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                                </Storyboard>
-                                            </VisualTransition>
-                                        </VisualStateGroup.Transitions>
-                                        <VisualState x:Name="Normal"/>
-                                        <VisualState x:Name="PointerOver"/>
-                                        <VisualState x:Name="Pressed">
-                                            <Storyboard>
-                                                <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="Disabled">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
-                                    <ContentPresenter x:Name="ContentPresenter" FontWeight="Normal" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="DATE"/>
+                <RadioButton Name="DateRadio" Content="23/05/2014" Checked="Radio_Checked"/>
+
+                <TextBlock Text="PRICE" Grid.Column="1"/>
+                <RadioButton Name="PriceRadio" Content="12.54" Grid.Column="1" Checked="Radio_Checked"/>
+                <TextBlock Text="KR/L" Grid.Column="1" VerticalAlignment="Bottom"/>
+
+                <TextBlock Text="FUEL" Grid.Row="1"/>
+                <RadioButton Name="FuelRadio" Content="47.87" Grid.Row="1" Checked="Radio_Checked"/>
+                <TextBlock Text="LITRES" Grid.Row="1" VerticalAlignment="Bottom"/>
+
+                <TextBlock Text="ODOMETER" Grid.Row="1" Grid.Column="1"/>
+                <RadioButton Name="OdometerRadio" Content="647374" Grid.Row="1" Grid.Column="1" Checked="Radio_Checked"/>
+                <TextBlock Text="KM" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom"/>
             </Grid>
-            <Grid Name="ButtonGrid" Grid.Row="2" VerticalAlignment="Bottom">
+            
+            <Grid Name="ButtonGrid" Grid.Row="2">
                 <Grid.Resources>
                     <conv:FullToReducedHeightConverter x:Name="FTR"/>
                 </Grid.Resources>
@@ -334,8 +161,8 @@
                 <Button Content="." Tag="Character" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="2" Click="Button_Click"/>
 
                 <Button Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Up" Style="{StaticResource SquareButton}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Down" Style="{StaticResource SquareButton}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE085;" FontFamily="Segoe UI Symbol" Tag="Previous" Style="{StaticResource SquareButton}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE086;" FontFamily="Segoe UI Symbol" Tag="Next" Style="{StaticResource SquareButton}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
                 <Button Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
             </Grid>
         </Grid>

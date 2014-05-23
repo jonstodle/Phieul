@@ -28,8 +28,7 @@ namespace Phieul.Pages {
     public sealed partial class FillingPage : Page {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private enum InputFields { Price, Volume, Odometer }
-        private InputFields ActiveField;
+        private RadioButton ActiveRadio;
 
         public FillingPage() {
             this.InitializeComponent();
@@ -37,8 +36,6 @@ namespace Phieul.Pages {
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-            SetActiveField(InputFields.Price);
         }
 
         /// <summary>
@@ -113,128 +110,44 @@ namespace Phieul.Pages {
                 AddCharacter(content);
             } else if(tag == "Delete") {
                 RemoveCharacter();
-            } else if(tag == "Up") {
-                MoveUp();
-            } else if(tag == "Down") {
-                MoveDown();
+            } else if(tag == "Previous") {
+                MoveToPrevious();
+            } else if(tag == "Next") {
+                MoveToNext();
             } else if(tag == "Save") {
-                //TODO: Implement save logic
+                //TODO: implement save logic
             }
         }
 
-        private void SetActiveField(InputFields toField) {
-            var accentColor = (Color)App.Current.Resources.ThemeDictionaries["SystemColorControlAccentColor"];
-            var upscaled = 1.1d;
-            var regular = 1d;
+        private void Radio_Checked(object sender, RoutedEventArgs e) {
+            ActiveRadio = (RadioButton)sender;
 
-            PriceBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            VolumeBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            OdometerBorder.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            ScaleAnimate(PriceGrid, regular);
-            ScaleAnimate(VolumeGrid, regular);
-            ScaleAnimate(OdometerGrid, regular);
-
-
-            switch(toField) {
-                case InputFields.Price:
-                    PriceBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(PriceGrid, upscaled);
-                    break;
-                case InputFields.Volume:
-                    VolumeBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(VolumeGrid, upscaled);
-                    break;
-                case InputFields.Odometer:
-                    OdometerBorder.BorderBrush = new SolidColorBrush(accentColor);
-                    ScaleAnimate(OdometerGrid, upscaled);
-                    break;
-                default:
-                    break;
+            if(ActiveRadio == DateRadio) {
+                //TODO: add date picker
             }
-
-            ActiveField = toField;
-        }
-
-        private void ScaleAnimate(UIElement obj, double to) {
-            obj.ScaleTransform(to, 0);
         }
 
         private void AddCharacter(string character) {
-            TextBlock tb = null;
-            switch(ActiveField) {
-                case InputFields.Price:
-                    tb = PriceInput;
-                    break;
-                case InputFields.Volume:
-                    tb = VolumeInput;
-                    break;
-                case InputFields.Odometer:
-                    tb = OdometerInput;
-                    break;
-                default:
-                    break;
-            }
-            if(character == "." && tb.Text.Contains(character)) return;
-            tb.Text += character;
+            var c = (string)ActiveRadio.Content;
+            if(c.Contains(".") && character == ".") return;
+            if(ActiveRadio == DateRadio) return;
+            ActiveRadio.Content = c += character;
         }
 
         private void RemoveCharacter() {
-            TextBlock tb = null;
-            switch(ActiveField) {
-                case InputFields.Price:
-                    tb = PriceInput;
-                    break;
-                case InputFields.Volume:
-                    tb = VolumeInput;
-                    break;
-                case InputFields.Odometer:
-                    tb = OdometerInput;
-                    break;
-                default:
-                    break;
-            }
-            if(tb.Text == string.Empty) return;
-            tb.Text = tb.Text.Remove(tb.Text.Count() - 1);
-        }
-
-        private void MoveUp() {
-            switch(ActiveField) {
-                case InputFields.Price:
-                    break;
-                case InputFields.Volume:
-                    SetActiveField(InputFields.Price);
-                    break;
-                case InputFields.Odometer:
-                    SetActiveField(InputFields.Volume);
-                    break;
-                default:
-                    break;
+            var c = (string)ActiveRadio.Content;
+            if(ActiveRadio == DateRadio) return;
+            if(!string.IsNullOrEmpty(c)) {
+                ActiveRadio.Content = c.Remove(c.Count() - 1);
             }
         }
 
-        private void MoveDown() {
-            switch(ActiveField) {
-                case InputFields.Price:
-                    SetActiveField(InputFields.Volume);
-                    break;
-                case InputFields.Volume:
-                    SetActiveField(InputFields.Odometer);
-                    break;
-                case InputFields.Odometer:
-                    break;
-                default:
-                    break;
-            }
+        private void MoveToPrevious() {
+
         }
 
-        private void Border_Tapped(object sender, TappedRoutedEventArgs e) {
-            if(sender == PriceBorder) {
-                SetActiveField(InputFields.Price);
-            } else if(sender == VolumeBorder) {
-                SetActiveField(InputFields.Volume);
-            } else if(sender == OdometerBorder) {
-                SetActiveField(InputFields.Odometer);
-            }
+        private void MoveToNext() {
+
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Phieul {
             Storyboard.SetTarget(story, e);
             Storyboard.SetTargetProperty(xAni, "(UIElement.RenderTransform).(CompositeTransform.ScaleX)");
             Storyboard.SetTargetProperty(yAni, "(UIElement.RenderTransform).(CompositeTransform.ScaleY)");
-
             story.Begin();
         }
     }
