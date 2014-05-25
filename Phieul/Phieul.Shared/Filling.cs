@@ -10,6 +10,10 @@ namespace Phieul {
         public enum ConsumptionUnits { LitresPerMetricMile, MilesPerGallon }
         public enum PriceUnits { PerKilometer, PerMile, PerMetricMile }
 
+        public Filling() {
+            Date = DateTime.UtcNow;
+        }
+
         #region Unit Settings
         public Distance.Units DistanceUnit {
             get {

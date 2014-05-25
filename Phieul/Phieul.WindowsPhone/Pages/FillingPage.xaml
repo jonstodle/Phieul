@@ -10,29 +10,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="Button" x:Key="SquareButton">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="MinHeight" Value="0"/>
-            <Setter Property="MinWidth" Value="0"/>
-            <Setter Property="Margin" Value="3,-7"/>
-            <Setter Property="Background" Value="#222222"/>
-            <Setter Property="FontSize" Value="{ThemeResource TextStyleExtraExtraLargeFontSize}"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
-        <Style TargetType="Border">
-            <Setter Property="BorderThickness" Value="0,2.5"/>
-            <Setter Property="Padding" Value="19,10"/>
-            <Setter Property="Margin" Value="0,-1.25"/>
-        </Style>
+    	
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/asphalt.jpg" Opacity=".2"/>
         </Grid.Background>
@@ -48,31 +30,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="19,12,0,0"/>
+        <TextBlock Text="MY APPLICATION" Style="{ThemeResource TitleTextBlockStyle}" Margin="19,24,0,0"/>
 
         <Grid Grid.Row="1" x:Name="ContentRoot">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <Grid Name="InputGrid" Margin="0,6">
                 <Grid.Resources>
-                    <Style TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
-                        <Setter Property="TextAlignment" Value="Center"/>
-                    </Style>
                     <Style TargetType="RadioButton">
                         <Setter Property="Background" Value="{ThemeResource PhoneRadioCheckBoxBrush}"/>
                         <Setter Property="BorderBrush" Value="{ThemeResource PhoneRadioCheckBoxBorderBrush}"/>
-                        <Setter Property="FontSize" Value="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
                         <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalAlignment" Value="Stretch"/>
-                        <Setter Property="Padding" Value="{ThemeResource CheckBoxAndRadioButtonTextPaddingThickness}"/>
+                        <Setter Property="Padding" Value="19,0"/>
+                        <Setter Property="Margin" Value="0,-1.25"/>
                         <Setter Property="MinWidth" Value="{ThemeResource CheckBoxAndRadioButtonMinWidthSize}"/>
-                        <Setter Property="GroupName" Value="InputRadios"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="RadioButton">
@@ -87,21 +66,36 @@
                                             </VisualStateGroup>
                                             <VisualStateGroup x:Name="CheckStates">
                                                 <VisualState x:Name="Checked">
-                                                    <Storyboard Duration="0:0:0.2">
-                                                        
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
+                                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                                <DiscreteObjectKeyFrame.Value>
+                                                                    <SolidColorBrush Color="{ThemeResource SystemColorControlAccentColor}"/>
+                                                                </DiscreteObjectKeyFrame.Value>
+                                                            </DiscreteObjectKeyFrame>
+                                                        </ObjectAnimationUsingKeyFrames>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="Unchecked"/>
                                                 <VisualState x:Name="Indeterminate"/>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
-                                        <Border Name="Border" BorderThickness="1" BorderBrush="{ThemeResource SystemColorControlAccentBrush}">
+                                        <Border Name="Border" BorderThickness="0,2.5">
                                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                         </Border>
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+                    </Style>
+                    <Style TargetType="TextBlock" x:Name="InputTitle">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
+                    </Style>
+                    <Style TargetType="TextBlock" x:Name="InputField">
+                        <Setter Property="TextAlignment" Value="Right"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
@@ -112,27 +106,167 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                <RadioButton Name="DateRadio" Grid.ColumnSpan="2" Checked="Radio_Checked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="DATE" Style="{StaticResource InputTitle}"/>
+                        <TextBlock Name="DateField" Style="{StaticResource InputField}" Grid.Column="1"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton Name="PriceRadio" IsChecked="True" Grid.Row="1" Grid.ColumnSpan="2" Checked="Radio_Checked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="PRICE" Style="{StaticResource InputTitle}"/>
+                        <TextBlock Name="PriceField" Style="{StaticResource InputField}" Grid.Column="1"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton Name="VolumeRadio" Grid.Row="2" Grid.ColumnSpan="2" Checked="Radio_Checked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="FUEL" Style="{StaticResource InputTitle}"/>
+                        <TextBlock Name="VolumeField" Style="{StaticResource InputField}" Grid.Column="1"/>
+                    </Grid>
+                </RadioButton>
+                <RadioButton Name="OdometerRadio" Grid.Row="3" Grid.ColumnSpan="2" Checked="Radio_Checked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ODOMETER" Style="{StaticResource InputTitle}"/>
+                        <TextBlock Name="OdometerField" Style="{StaticResource InputField}" Grid.Column="1"/>
+                    </Grid>
+                </RadioButton>
                 
-                <TextBlock Text="DATE"/>
-                <RadioButton Name="DateRadio" Content="23/05/2014" Checked="Radio_Checked"/>
-
-                <TextBlock Text="PRICE" Grid.Column="1"/>
-                <RadioButton Name="PriceRadio" Content="12.54" Grid.Column="1" Checked="Radio_Checked"/>
-                <TextBlock Text="KR/L" Grid.Column="1" VerticalAlignment="Bottom"/>
-
-                <TextBlock Text="FUEL" Grid.Row="1"/>
-                <RadioButton Name="FuelRadio" Content="47.87" Grid.Row="1" Checked="Radio_Checked"/>
-                <TextBlock Text="LITRES" Grid.Row="1" VerticalAlignment="Bottom"/>
-
-                <TextBlock Text="ODOMETER" Grid.Row="1" Grid.Column="1"/>
-                <RadioButton Name="OdometerRadio" Content="647374" Grid.Row="1" Grid.Column="1" Checked="Radio_Checked"/>
-                <TextBlock Text="KM" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom"/>
+                <ToggleButton Name="TankToggle" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Normal" IsChecked="True">
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="PointerOver"/>
+                                        <VisualState x:Name="Pressed"/>
+                                        <VisualState x:Name="Disabled"/>
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FullTankBorder" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PartialTankBorder" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPointerOver"/>
+                                        <VisualState x:Name="CheckedPressed"/>
+                                        <VisualState x:Name="CheckedDisabled"/>
+                                        <VisualState x:Name="Indeterminate"/>
+                                        <VisualState x:Name="IndeterminatePointerOver"/>
+                                        <VisualState x:Name="IndeterminatePressed"/>
+                                        <VisualState x:Name="IndeterminateDisabled"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border Name="FullTankBorder" Opacity="0">
+                                    <TextBlock Text="FULL TANK" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                </Border>
+                                <Border Name="PartialTankBorder">
+                                    <TextBlock Text="PARTIAL TANK" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+                
+                <Button Name="OptionsButton" Content="OPTIONS" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" FontWeight="Normal">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid x:Name="Grid" Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="PointerOver"/>
+                                        <VisualState x:Name="Pressed"/>
+                                        <VisualState x:Name="Disabled"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                                    <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
-            
+
             <Grid Name="ButtonGrid" Grid.Row="2">
                 <Grid.Resources>
                     <conv:FullToReducedHeightConverter x:Name="FTR"/>
+                    <Style TargetType="Button" x:Key="SquareButton">
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="MinHeight" Value="0"/>
+                        <Setter Property="MinWidth" Value="0"/>
+                        <Setter Property="Margin" Value="3,-7"/>
+                        <Setter Property="Background" Value="#222222"/>
+                        <Setter Property="FontSize" Value="{ThemeResource TextStyleExtraExtraLargeFontSize}"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                    <ControlTemplate x:Key="SquareButtonTemplate" TargetType="Button">
+                        <Grid x:Name="Grid" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Grid" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPressedForegroundThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonPressedBackgroundThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+    				Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                                <ContentPresenter x:Name="ContentPresenter" Foreground="{TemplateBinding Foreground}"
+    					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+    					VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"
+    					Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+    					AutomationProperties.AccessibilityView="Raw"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -147,23 +281,23 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Content="0" Grid.Row="3" Tag="Character" Style="{StaticResource SquareButton}" Grid.ColumnSpan="2" Click="Button_Click"/>
-                <Button Content="1" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="2" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="3" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="2" Click="Button_Click"/>
-                <Button Content="4" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="5" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="6" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="2" Click="Button_Click"/>
-                <Button Content="7" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="8" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="9" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="0" Grid.Row="3" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.ColumnSpan="2" Click="Button_Click"/>
+                <Button Content="1" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
+                <Button Content="2" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="3" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="4" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
+                <Button Content="5" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="6" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="7" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
+                <Button Content="8" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="9" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
 
-                <Button Content="." Tag="Character" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="." Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="2" Click="Button_Click"/>
 
-                <Button Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE085;" FontFamily="Segoe UI Symbol" Tag="Previous" Style="{StaticResource SquareButton}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE086;" FontFamily="Segoe UI Symbol" Tag="Next" Style="{StaticResource SquareButton}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Previous" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Next" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
             </Grid>
         </Grid>
     </Grid>

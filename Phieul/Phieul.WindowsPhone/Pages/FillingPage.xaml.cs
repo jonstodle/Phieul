@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -36,6 +37,7 @@ namespace Phieul.Pages {
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
         }
 
         /// <summary>
@@ -65,6 +67,15 @@ namespace Phieul.Pages {
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e) {
+            var filling = e.NavigationParameter as Filling;
+            if(filling == null) {
+                filling = new Filling();
+            }
+            this.DataContext = filling;
+            DateField.Text = filling.Date.ToString();
+            PriceField.Text = filling.Price.ToString();
+            VolumeField.Text = filling.FilledVolume.ToString();
+            OdometerField.Text = filling.Odometer.ToString();
         }
 
         /// <summary>
@@ -119,35 +130,80 @@ namespace Phieul.Pages {
             }
         }
 
-        private void Radio_Checked(object sender, RoutedEventArgs e) {
-            ActiveRadio = (RadioButton)sender;
-
-            if(ActiveRadio == DateRadio) {
-                //TODO: add date picker
-            }
-        }
-
         private void AddCharacter(string character) {
-            var c = (string)ActiveRadio.Content;
-            if(c.Contains(".") && character == ".") return;
-            if(ActiveRadio == DateRadio) return;
-            ActiveRadio.Content = c += character;
+            TextBlock field = null;
+            if(ActiveRadio == PriceRadio) {
+                field = PriceField;
+            } else if(ActiveRadio == VolumeRadio) {
+                field = VolumeField;
+            } else if(ActiveRadio == OdometerRadio) {
+                field = OdometerField;
+            }
+
+            if(field == null) return;
+            var txt = field.Text;
+
+            if(character == "." && txt.Contains(character)) return;
+            if(txt == "0") {
+                if(character == ".") {
+                    txt = "0";
+                } else if(character != "0") {
+                    txt = "";
+                }
+            }
+            field.Text = txt + character;
         }
 
         private void RemoveCharacter() {
-            var c = (string)ActiveRadio.Content;
-            if(ActiveRadio == DateRadio) return;
-            if(!string.IsNullOrEmpty(c)) {
-                ActiveRadio.Content = c.Remove(c.Count() - 1);
+            TextBlock field = null;
+            if(ActiveRadio == PriceRadio) {
+                field = PriceField;
+            } else if(ActiveRadio == VolumeRadio) {
+                field = VolumeField;
+            } else if(ActiveRadio == OdometerRadio) {
+                field = OdometerField;
+            }
+
+            if(field == null) return;
+            var txt = field.Text;
+            var count = txt.Count();
+
+            if(count > 1) {
+                field.Text = txt.Remove(count - 1);
+            } else {
+                field.Text = "0";
             }
         }
 
         private void MoveToPrevious() {
-
+            if(ActiveRadio == PriceRadio) {
+                DateRadio.IsChecked = true;
+            } else if(ActiveRadio == VolumeRadio) {
+                PriceRadio.IsChecked = true;
+            } else if(ActiveRadio == OdometerRadio) {
+                VolumeRadio.IsChecked = true;
+            }
         }
 
         private void MoveToNext() {
+            if(ActiveRadio == DateRadio) {
+                PriceRadio.IsChecked = true;
+            } else if(ActiveRadio == PriceRadio) {
+                VolumeRadio.IsChecked = true;
+            } else if(ActiveRadio == VolumeRadio) {
+                OdometerRadio.IsChecked = true;
+            }
+        }
 
+        private async void Radio_Checked(object sender, RoutedEventArgs e) {
+            ActiveRadio = (RadioButton)sender;
+            if(ActiveRadio == DateRadio) {
+                var dpfo = new DatePickerFlyout();
+                var pickerOpen = dpfo.ShowAtAsync(ContentRoot);
+                PriceRadio.IsChecked = true;
+                var result = await pickerOpen;
+                DateField.Text = result.Value.DateTime.ToString();
+            }
         }
     }
 }
