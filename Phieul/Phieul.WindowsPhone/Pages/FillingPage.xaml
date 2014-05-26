@@ -190,7 +190,7 @@
                     </ToggleButton.Template>
                 </ToggleButton>
                 
-                <Button Name="OptionsButton" Content="OPTIONS" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" FontWeight="Normal">
+                <Button Name="OptionsButton" Content="OPTIONS" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" FontWeight="Normal" Click="OptionsButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="Grid" Background="Transparent">
@@ -281,23 +281,23 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Button Content="0" Grid.Row="3" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.ColumnSpan="2" Click="Button_Click"/>
-                <Button Content="1" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="2" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="3" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
-                <Button Content="4" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="5" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="6" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
-                <Button Content="7" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="Button_Click"/>
-                <Button Content="8" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="Button_Click"/>
-                <Button Content="9" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="0" Grid.Row="3" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.ColumnSpan="2" Click="KeyPadButton_Click"/>
+                <Button Content="1" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="KeyPadButton_Click"/>
+                <Button Content="2" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="KeyPadButton_Click"/>
+                <Button Content="3" Grid.Row="2" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="KeyPadButton_Click"/>
+                <Button Content="4" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="KeyPadButton_Click"/>
+                <Button Content="5" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="KeyPadButton_Click"/>
+                <Button Content="6" Grid.Row="1" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="KeyPadButton_Click"/>
+                <Button Content="7" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="0" Click="KeyPadButton_Click"/>
+                <Button Content="8" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="1" Click="KeyPadButton_Click"/>
+                <Button Content="9" Grid.Row="0" Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Column="2" Click="KeyPadButton_Click"/>
 
-                <Button Content="." Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="2" Click="Button_Click"/>
+                <Button Content="." Tag="Character" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="2" Click="KeyPadButton_Click"/>
 
-                <Button Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Previous" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Next" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
-                <Button Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="Button_Click"/>
+                <Button Content="&#xE083;" FontFamily="Segoe UI Symbol" Tag="Delete" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="0" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="KeyPadButton_Click"/>
+                <Button Content="&#xE08A;" FontFamily="Segoe UI Symbol" Tag="Previous" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="1" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="KeyPadButton_Click"/>
+                <Button Content="&#xE08B;" FontFamily="Segoe UI Symbol" Tag="Next" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="2" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="KeyPadButton_Click"/>
+                <Button Content="&#xE105;" FontFamily="Segoe UI Symbol" Tag="Save" Style="{StaticResource SquareButton}" Template="{StaticResource SquareButtonTemplate}" Grid.Row="3" Grid.Column="3" Height="{Binding ActualWidth, ElementName=ButtonGridColumn, Mode=OneWay, Converter={StaticResource FTR}}" Click="KeyPadButton_Click"/>
             </Grid>
         </Grid>
     </Grid>

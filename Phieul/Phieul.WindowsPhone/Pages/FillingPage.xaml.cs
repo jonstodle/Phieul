@@ -37,7 +37,7 @@ namespace Phieul.Pages {
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Phieul.Pages {
 
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void KeyPadButton_Click(object sender, RoutedEventArgs e) {
             var tag = (string)((Button)sender).Tag;
             var content = (string)((Button)sender).Content;
             if(tag == "Character") {
@@ -199,11 +199,14 @@ namespace Phieul.Pages {
             ActiveRadio = (RadioButton)sender;
             if(ActiveRadio == DateRadio) {
                 var dpfo = new DatePickerFlyout();
-                var pickerOpen = dpfo.ShowAtAsync(ContentRoot);
+                var result = await dpfo.ShowAtAsync(ContentRoot);
                 PriceRadio.IsChecked = true;
-                var result = await pickerOpen;
-                DateField.Text = result.Value.DateTime.ToString();
+                if(result.HasValue) DateField.Text = result.Value.DateTime.ToString();
             }
+        }
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
