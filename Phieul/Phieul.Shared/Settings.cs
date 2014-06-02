@@ -80,6 +80,7 @@ namespace Phieul {
             var rf = ApplicationData.Current.RoamingFolder;
             var file = await rf.CreateFileAsync("data.json", CreationCollisionOption.OpenIfExists);
             data = JsonConvert.DeserializeObject<FillingCollection>(await FileIO.ReadTextAsync(file));
+            System.Diagnostics.Debug.WriteLine("Settings Loaded");
         }
 
         public async void SaveData() {
@@ -87,17 +88,13 @@ namespace Phieul {
             var rf = ApplicationData.Current.RoamingFolder;
             var file = await rf.CreateFileAsync("data.json", CreationCollisionOption.OpenIfExists);
             await FileIO.WriteTextAsync(file, json);
+            System.Diagnostics.Debug.WriteLine("Settings Saved");
         }
 
         void OnPropertyChanged(string propertyName) {
             if(PropertyChanged != null) {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-
-        ~Settings() {
-            System.Diagnostics.Debug.WriteLine("Finalized");
-            SaveData();
         }
     }
 }

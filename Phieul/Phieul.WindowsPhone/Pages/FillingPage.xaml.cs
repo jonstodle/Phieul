@@ -72,7 +72,7 @@ namespace Phieul.Pages {
                 filling = new Filling();
             }
             this.DataContext = filling;
-            DateField.Text = filling.Date.ToString();
+            DateField.Text = filling.Date.ToString("d");
             PriceField.Text = filling.Price.ToString();
             VolumeField.Text = filling.FilledVolume.ToString();
             OdometerField.Text = filling.Odometer.ToString();
@@ -201,7 +201,7 @@ namespace Phieul.Pages {
                 var dpfo = new DatePickerFlyout();
                 var result = await dpfo.ShowAtAsync(ContentRoot);
                 PriceRadio.IsChecked = true;
-                if(result.HasValue) DateField.Text = result.Value.DateTime.ToString();
+                if(result.HasValue) DateField.Text = result.Value.DateTime.ToString("d");
             }
         }
 

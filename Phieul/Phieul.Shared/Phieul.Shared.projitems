@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToDate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Distance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Filling.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FillingCollection.cs" />

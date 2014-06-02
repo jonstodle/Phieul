@@ -13,11 +13,7 @@
     	
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot">
-
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/asphalt.jpg" Opacity=".2"/>
-        </Grid.Background>
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhieulPageBackgroundBrush}">
 
         <Grid.ChildrenTransitions>
             <TransitionCollection>

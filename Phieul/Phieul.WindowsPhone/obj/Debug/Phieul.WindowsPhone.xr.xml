@@ -21,6 +21,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Name" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
+      <RootProperty Name="ImageSource" />
+      <RootProperty Name="Opacity" />
+    </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
@@ -68,10 +72,6 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Phieul.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
-      <RootProperty Name="ImageSource" />
-      <RootProperty Name="Opacity" />
-    </RootType>
     <RootType FullName="Phieul.Converters.FullToReducedHeightConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Content" />
