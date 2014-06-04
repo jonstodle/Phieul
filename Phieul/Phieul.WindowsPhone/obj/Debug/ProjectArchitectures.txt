@@ -1,1 +1,1 @@
-C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\Phieul.WindowsPhone.csproj;neutral
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\Phieul.WindowsPhone.csproj;neutral

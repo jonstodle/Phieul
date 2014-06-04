@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-    	
+
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhieulPageBackgroundBrush}">
@@ -145,7 +145,7 @@
                         <TextBlock Name="OdometerField" Style="{StaticResource InputField}" Grid.Column="1"/>
                     </Grid>
                 </RadioButton>
-                
+
                 <ToggleButton Name="TankToggle" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Normal" IsChecked="True">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
@@ -185,7 +185,7 @@
                         </ControlTemplate>
                     </ToggleButton.Template>
                 </ToggleButton>
-                
+
                 <Button x:ConnectionId='20' Name="OptionsButton" Content="OPTIONS" Grid.Row="4" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" FontWeight="Normal"                            >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -253,13 +253,8 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-    				Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
-                                <ContentPresenter x:Name="ContentPresenter" Foreground="{TemplateBinding Foreground}"
-    					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-    					VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"
-    					Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
-    					AutomationProperties.AccessibilityView="Raw"/>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                                <ContentPresenter x:Name="ContentPresenter" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" AutomationProperties.AccessibilityView="Raw"/>
                             </Border>
                         </Grid>
                     </ControlTemplate>

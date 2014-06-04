@@ -205,8 +205,9 @@ namespace Phieul.Pages {
             }
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e) {
-
+        private async void OptionsButton_Click(object sender, RoutedEventArgs e) {
+            var optionsFlyout = new FillingOptionsFlyout();
+            await optionsFlyout.ShowAsync();
         }
     }
 }

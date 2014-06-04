@@ -39,3 +39,8 @@ C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingPage.g.i.cs
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingPage.g.cs
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingPage.xaml
 C:\Dev\Phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingPage.xbf
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\bin\Debug\Pages\FillingOptionsFlyout.xbf
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingOptionsFlyout.g.i.cs
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingOptionsFlyout.g.cs
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingOptionsFlyout.xaml
+C:\Dev\phieul\Phieul\Phieul.WindowsPhone\obj\Debug\Pages\FillingOptionsFlyout.xbf
